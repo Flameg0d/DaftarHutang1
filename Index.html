@@ -18,8 +18,7 @@
             <div>
                 <label for="nama" class="block text-gray-600 font-medium">Nama:</label>
                 <input type="text" id="nama" required class="w-full p-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300">
-            </div>
-
+                <p id="namaWarning" class="text-red-500 text-sm hidden">Nama harus terdiri dari minimal 2 huruf.</p>
             <div>
                 <label for="jenis" class="block text-gray-600 font-medium">Jenis:</label>
                 <select id="jenis" required class="w-full p-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300">
@@ -31,7 +30,9 @@
 
             <div>
                 <label for="nominal" class="block text-gray-600 font-medium">Nominal:</label>
-                <input type="number" id="nominal" required class="w-full p-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300">
+                <p id="nominalWarning" class="text-red-500 text-sm hidden">nominal harus terdiri angka.</p>
+            <div>
+                <input type="text" id="nominal" required class="w-full p-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300">
             </div>
 
             <div>
@@ -86,6 +87,21 @@
             let nominal = document.getElementById('nominal').value;
             let status = document.getElementById('status').value;
             let editIndex = document.getElementById('editIndex').value;
+
+            // Validasi nama
+            if (nama.trim().length < 2) {
+                document.getElementById('namaWarning').classList.remove('hidden');
+                return; // Hentikan eksekusi jika nama tidak valid
+            } else {
+                document.getElementById('namaWarning').classList.add('hidden');
+            }
+
+            if (nominal,'string') {
+                document.getElementById('nominalWarning').classList.remove('hidden');
+                return; // Hentikan eksekusi jika nama tidak valid
+            } else {
+                document.getElementById('nominalWarning').classList.add('hidden');
+            }
 
             if (nama && jenis && nominal && status) {
                 let table = document.getElementById('dataTable');
